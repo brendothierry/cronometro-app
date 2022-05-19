@@ -74,6 +74,7 @@ limpar() {
     );
   }
 }
+//obs
 
 const styles = StyleSheet.create({
   container:{
