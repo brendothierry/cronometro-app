@@ -7,7 +7,8 @@ constructor(props){
   super(props);
   this.state={
     numero: 0,
-    botao: 'VAI'
+    botao: 'VAI',
+    ultimo: null
   };
 
   this.timer = null;
@@ -33,6 +34,15 @@ vai() {
 }
 
 limpar() {
+  if(this.timer != null){
+    clearInterval(this.timer);
+    this.timer = null;
+  }
+  this.setState({
+    ultimo: this.state.numero,
+    numero: 0,
+    botao: 'VAI '
+  })
 
 }
 
@@ -55,7 +65,10 @@ limpar() {
         <TouchableOpacity style={styles.btn} onPress={this.limpar}>
           <Text style={styles.btnTexto}>LIMPAR</Text>
         </TouchableOpacity>
-
+      </View>
+      <View style={styles.ultimo}>
+      <Text style={styles.textoCorrida}>
+        {this.state.ultimo > 0 ? 'Último tempo: ' + this.state.ultimo.toFixed(2) + 's' : ''}</Text>
       </View>
       </View>
     );
@@ -73,7 +86,8 @@ const styles = StyleSheet.create({
     marginTop: -160,
     color: '#FFF',
     fontSize: 65,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    marginLeft: 18
   },
   btnArea:{
     flexDirection: 'row',
@@ -93,6 +107,15 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     color: '#00aeef'
+  },
+  ultimo:{
+    marginTop:40,
+
+  },
+  textoCorrida:{
+    fontSize:25,
+    fontStyle: 'italic',
+    color: '#FFF'
   }
 
 })
